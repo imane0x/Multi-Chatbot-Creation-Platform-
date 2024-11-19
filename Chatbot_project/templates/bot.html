@@ -1,0 +1,107 @@
+<html>
+
+<head>
+
+	<!-- seo related -->
+	<title>Chatbot Frontend</title>
+
+	<!-- meta related -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- vendor css & style files -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300|Oxygen|Material+Icons"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<!-- custom css -->
+	<link rel="stylesheet" type="text/css" href="static/main.css">
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="row padded_row">
+
+			<!-- right side content -->
+			<div class="col-md-7">
+
+				<div class="chat_window">
+
+					<div class="top_menu">
+						<div class="title">{{ CHATBOT_NAME }}</div>
+					</div>
+
+					<!-- dynamically rendered -->
+					<ul class="messages"></ul>
+
+					<!-- input -->
+					<div class="bottom_wrapper">
+						<input id="msg_input" placeholder="Say Hi to begin chat..." />
+						<div id="send_button" class="app_button_1">Send</div>
+					</div>
+
+				</div>
+
+			</div>
+
+	
+                <!-- left side content -->
+<div class="col-md-5">
+    <div class="chat_window">
+
+        <div class="top_menu">
+            <!-- Dropdown to switch chatbot personalities -->
+            <div class="title">
+                <select id="chatbot-personality" class="form-control">
+                    <option value="Friendly">Friendly</option>
+                    <option value="Formal">Formal</option>
+                    <option value="Witty">Witty</option>
+                    <!-- Add more personalities as needed -->
+                </select>
+            </div>
+        </div>
+
+       
+			</div>
+		</div>
+			<script>
+				document.getElementById("chatbot-personality").addEventListener("submit", async function (e) {
+					e.preventDefault();
+					const personality = document.getElementById("personality").value;
+					
+					// Make a POST request to the backend
+					const response = await fetch("/predict", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ personality}),
+					});
+		
+					const result = await response.json();
+				});
+			</script>
+		
+
+	
+
+	
+		
+		
+
+	</div>
+
+	<!-- vendor script files -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+	</script>
+
+	<!-- custom scripts -->
+	<script src="static/main.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>
