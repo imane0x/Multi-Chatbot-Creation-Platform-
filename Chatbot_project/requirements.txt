@@ -43,7 +43,7 @@ google-auth==2.36.0
 google-auth-httplib2==0.2.0
 google-generativeai==0.5.4
 googleapis-common-protos==1.66.0
-greenlet==1.1.2
+greenlet
 grpcio==1.68.0
 grpcio-status==1.62.3
 h11==0.14.0
